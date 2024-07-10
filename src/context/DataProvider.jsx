@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
 
   const fetchMovies = async (searchQuery) => {
     const response = await axios.get(
-      `http://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
+      `https://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
     );
     setMovies(response.data.Search);
   };
@@ -30,12 +30,12 @@ export const DataProvider = ({ children }) => {
   const filterMovies = async (filter) => {
     if (type === "all") {
       const response = await axios.get(
-        `http://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
+        `https://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
       );
       setMovies(response.data.Search);
     } else {
       const response = await axios.get(
-        `http://www.omdbapi.com/?s=${searchQuery}&type=${filter}&apikey=280d9187`
+        `https://www.omdbapi.com/?s=${searchQuery}&type=${filter}&apikey=280d9187`
       );
       setMovies(response.data.Search);
     }
