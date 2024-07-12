@@ -12,32 +12,44 @@ export const DataProvider = ({ children }) => {
   const [options, setOptions] = useState(["all", "movie", "series", "episode"]);
 
   const fetchMovies = async (searchQuery) => {
-    const response = await axios.get(
-      `https://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
-    );
-    setMovies(response.data.Search);
-  };
-
-  const fetchMovieDetails = async (id, type) => {
-    const response = await fetch(
-      `https://www.omdbapi.com/?i=${id}&type=${type}&apikey=280d9187`
-    );
-    const data = await response.json();
-    console.log(data);
-    setMovie(data);
-  };
-
-  const filterMovies = async (filter) => {
-    if (type === "all") {
+    try {
       const response = await axios.get(
         `https://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
       );
       setMovies(response.data.Search);
-    } else {
-      const response = await axios.get(
-        `https://www.omdbapi.com/?s=${searchQuery}&type=${filter}&apikey=280d9187`
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchMovieDetails = async (id, type) => {
+    try {
+      const response = await fetch(
+        `https://www.omdbapi.com/?i=${id}&type=${type}&apikey=280d9187`
       );
-      setMovies(response.data.Search);
+      const data = await response.json();
+      console.log(data);
+      setMovie(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const filterMovies = async (filter) => {
+    try {
+      if (type === "all") {
+        const response = await axios.get(
+          `https://www.omdbapi.com/?s=${searchQuery}&apikey=280d9187`
+        );
+        setMovies(response.data.Search);
+      } else {
+        const response = await axios.get(
+          `https://www.omdbapi.com/?s=${searchQuery}&type=${filter}&apikey=280d9187`
+        );
+        setMovies(response.data.Search);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
